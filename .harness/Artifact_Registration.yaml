@@ -16,10 +16,12 @@ pipeline:
                   name: Find Artifact
                   identifier: Find_Artifact
                   spec:
+                    connectorRef: Nics_Registry
+                    image: ubuntu:22.4
                     shell: Sh
                     command: |-
-                      export PLUGIN_ARTIFACT_URL=https://www.google.com
-                      export PLUGIN_NAME=Google
+                      export PLUGIN_ARTIFACT_URL=https://www.amazon.com/
+                      export PLUGIN_ARTIFACT_NAME=Amazon
               - step:
                   type: Plugin
                   name: Register Artifact

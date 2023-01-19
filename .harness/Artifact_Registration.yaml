@@ -18,8 +18,8 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |-
-                      export ARTIFACT_URL=https://www.google.com
-                      export NAME=Google
+                      export PLUGIN_ARTIFACT_URL=https://www.google.com
+                      export PLUGIN_NAME=Google
               - step:
                   type: Plugin
                   name: Register Artifact
@@ -39,5 +39,13 @@ pipeline:
             type: String
             description: ""
             value: /addon/tmp/.plugin/artifact
+          - name: PLUGIN_ARTIFACT_URL
+            type: String
+            description: ""
+            value: https://www.google.com
+          - name: PLUGIN_NAME
+            type: String
+            description: ""
+            value: Google
   identifier: Artifact_Registration
   name: Artifact Registration

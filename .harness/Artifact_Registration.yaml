@@ -31,11 +31,16 @@ pipeline:
                     connectorRef: Nics_Registry
                     image: docker.io/lovellfelix/surge.sh-ci
                     shell: Sh
-                    command: ./bin/entrypoint.sh
+                    command: |-
+                      ./bin/entrypoint.sh
+
+                      export ARTIFACT_URL="https://${SURGE_PROJECT_DOMAIN}.surge.sh"
                     envVariables:
                       SURGE_ACT_TOKEN: <+secrets.getValue(“project.NicA_Surge_Token”)>
                       SURGE_ACT_EMAIL: nicolas.acton@harness.io
                       SURGE_PROJECT_DOMAIN: harness-artifact
+                    outputVariables:
+                      - name: ARTIFACT_URL
                   description: Creates a surge.sh website
               - step:
                   type: Plugin

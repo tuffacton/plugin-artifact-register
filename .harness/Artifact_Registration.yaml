@@ -12,6 +12,32 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: GitClone
+                  name: Clone Website
+                  identifier: Clone_Website
+                  spec:
+                    connectorRef: account.Public_Github
+                    repoName: cloudacademy/static-website-example
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
+                  description: Pulls a basic website example
+              - step:
+                  type: Run
+                  name: Surge
+                  identifier: Surge
+                  spec:
+                    connectorRef: Nics_Registry
+                    image: docker.io/lovellfelix/surge.sh-ci
+                    shell: Sh
+                    command: ./bin/entrypoint.sh
+                    envVariables:
+                      SURGE_ACT_TOKEN: <+secrets.getValue(“project.NicA_Surge_Token”)>
+                      SURGE_ACT_EMAIL: nicolas.acton@harness.io
+                      SURGE_PROJECT_DOMAIN: harness-artifact
+                  description: Creates a surge.sh website
+              - step:
                   type: Plugin
                   name: Register Artifact
                   identifier: create_artifact

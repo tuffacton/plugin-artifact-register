@@ -8,9 +8,21 @@ pipeline:
         identifier: Build
         type: CI
         spec:
-          cloneCodebase: true
+          cloneCodebase: false
           execution:
             steps:
+              - step:
+                  type: GitClone
+                  name: Git Clone
+                  identifier: Git_Clone
+                  spec:
+                    connectorRef: account.Public_Github
+                    repoName: cloudacademy/static-website-example
+                    cloneDirectory: /usr/src/app
+                    build:
+                      type: branch
+                      spec:
+                        branch: master
               - step:
                   type: Run
                   name: Surge
@@ -20,8 +32,6 @@ pipeline:
                     image: docker.io/lovellfelix/surge.sh-ci
                     shell: Sh
                     command: |-
-                      mv ~/static-website-example/* /usr/src/app
-
                       /bin/entrypoint.sh
 
                       export ARTIFACT_URL="https://${SURGE_PROJECT_DOMAIN}.surge.sh"
@@ -51,11 +61,5 @@ pipeline:
             type: String
             description: ""
             value: /addon/tmp/.plugin/artifact
-  properties:
-    ci:
-      codebase:
-        connectorRef: account.Public_Github
-        repoName: cloudacademy/static-website-example
-        build: <+input>
   identifier: Artifact_Registration
   name: Artifact Registration

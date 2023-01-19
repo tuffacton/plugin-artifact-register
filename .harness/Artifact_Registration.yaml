@@ -39,8 +39,10 @@ pipeline:
                       SURGE_ACT_TOKEN: <+input>
                       SURGE_ACT_EMAIL: nicolas.acton@harness.io
                       SURGE_PROJECT_DOMAIN: harness-artifact
+                      NAME: Surge
                     outputVariables:
                       - name: ARTIFACT_URL
+                      - name: NAME
                   description: Creates a surge.sh website
               - step:
                   type: Plugin

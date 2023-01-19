@@ -1,91 +1,40 @@
----
 pipeline:
-  projectIdentifier: "Nic_Sandbox"
-  orgIdentifier: "SE_Sandbox"
+  projectIdentifier: Nic_Sandbox
+  orgIdentifier: SE_Sandbox
   tags: {}
   stages:
-  - stage:
-      name: "Selenium Testing"
-      identifier: "Build"
-      type: "CI"
-      spec:
-        cloneCodebase: true
-        execution:
-          steps:
-          - step:
-              type: "RunTests"
-              name: "Run Tests"
-              identifier: "Run_Tests"
-              spec:
-                connectorRef: "Nics_Registry"
-                image: "maven"
-                language: "Java"
-                buildTool: "Maven"
-                args: "test verify"
-                runOnlySelectedTests: true
-                reports:
-                  type: "JUnit"
+    - stage:
+        name: Plugin Testing
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Plugin
+                  name: Register Artifact
+                  identifier: create_artifact
                   spec:
-                    paths:
-                    - "target/cucumber-reports/*.xml"
-          - step:
-              type: "S3Upload"
-              name: "Upload Artifacts to S3"
-              identifier: "Upload_Artifacts_to_S3"
-              spec:
-                connectorRef: "Nic_AWS"
-                region: "us-east-1"
-                bucket: "nic-harness-test"
-                sourcePath: "target/site/cucumber-reports/*"
-          - step:
-              type: "Run"
-              name: "test"
-              identifier: "test"
-              spec:
-                connectorRef: "Nics_Registry"
-                image: "ubuntu:22.04"
-                shell: "Bash"
-                command: "echo -n \"IyEvYmluL2Jhc2gKCmV4cG9ydCBQTFVHSU5fQVJUSUZBQ1RfRklMRT0iL2FkZG9uL3RtcC8ucGx1Z2luL2FydGlmYWN0IgoKbWtkaXIgLXAgL2FkZG9uL3RtcC8ucGx1Z2luLwoKY2F0ID4iJHtQTFVHSU5fQVJUSUZBQ1RfRklMRX0iIDw8ICdFT0YnCnsKICAia2luZCI6ICJmaWxlVXBsb2FkL3YxIiwKICAiZGF0YSI6IHsKICAgICJmaWxlQXJ0aWZhY3RzIjogWwogICAgICB7CiAgICAgICAgIm5hbWUiOiAiR29vZ2xlIiwKICAgICAgICAidXJsIjogImh0dHBzOi8vd3d3Lmdvb2dsZS5jb20iCiAgICAgIH0KICAgIF0KICB9Cn0KRU9GCgpjYXQgIiR7UExVR0lOX0FSVElGQUNUX0ZJTEV9Igo=\"\
-                  \ \\\n  | base64 -d > /tmp/harness-hack/create-artifact.sh\n\nsed\
-                  \ -i \"s|www.google.com|s3.console.aws.amazon.com/s3/object/${BUCKET}?region=${REGION}\\\
-                  &prefix=${OBJECT}|\" /tmp/harness-hack/create-artifact.sh\n\nsed\
-                  \ -i \"s/Google/${NAME}/\" /tmp/harness-hack/create-artifact.sh\n\
-                  \nchmod +x /tmp/harness-hack/create-artifact.sh\n\ncat /tmp/harness-hack/create-artifact.sh\n\
-                  \nsleep 60"
-                envVariables:
-                  BUCKET: "nic-harness-test"
-                  OBJECT: "html-test-page.html"
-                  REGION: "us-east-1"
-                  NAME: "Selenium"
-          - step:
-              type: "Plugin"
-              name: "create artifact"
-              identifier: "create_artifact"
-              spec:
-                connectorRef: "Nics_Registry"
-                image: "ubuntu:22.04"
-                entrypoint:
-                - "/tmp/harness-hack/create-artifact.sh"
-        infrastructure:
-          type: "KubernetesDirect"
-          spec:
-            connectorRef: "org.SE_Sandbox"
-            namespace: "harness-delegate-ng"
-            automountServiceAccountToken: true
-            nodeSelector: {}
-            os: "Linux"
-        sharedPaths:
-        - "/tmp/harness-hack"
-      variables:
-      - name: "PLUGIN_ARTIFACT_FILE"
-        type: "String"
-        description: ""
-        value: "/addon/tmp/.plugin/artifact"
+                    connectorRef: Nics_Registry
+                    image: tuffacton/registerartifact
+                  description: Registers an arbitrary artifact URI in a pipeline execution.
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+        variables:
+          - name: PLUGIN_ARTIFACT_FILE
+            type: String
+            description: ""
+            value: /addon/tmp/.plugin/artifact
   properties:
     ci:
       codebase:
-        connectorRef: "account.nicacton_github"
-        repoName: "maven-cucumber-test"
-        build: "<+input>"
-  identifier: "Artifact_Registration"
-  name: "Artifact Registration"
+        connectorRef: account.nicacton_github
+        repoName: plugin-artifact-register
+        build: <+input>
+  identifier: Artifact_Registration
+  name: Artifact Registration

@@ -1,0 +1,47 @@
+pipeline:
+    name: harness-artifact-register
+    identifier: Harness_Artifact_Register_Plugin_Build
+    projectIdentifier: Plugins
+    orgIdentifier: default
+    tags: {}
+    properties:
+        ci:
+            codebase:
+                connectorRef: lukehertert_GitHub_Org
+                repoName: harness-buildpacks
+                build:
+                    type: branch
+                    spec:
+                        branch: main
+    stages:
+        - stage:
+              name: Build
+              identifier: Build
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: laptopk8s
+                          namespace: default
+                          automountServiceAccountToken: true
+                          nodeSelector: {}
+                          os: Linux
+                  execution:
+                      steps:
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: Build and Push
+                                identifier: Build_and_Push
+                                spec:
+                                    connectorRef: Luke_Dockerhub
+                                    repo: ldhertert/harness-buildpacks
+                                    tags:
+                                        - latest
+                                        - <+pipeline.sequenceId>
+                                failureStrategies: []
+              variables:
+                  - name: container
+                    type: String
+                    value: docker

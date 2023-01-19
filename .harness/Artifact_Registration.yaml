@@ -12,18 +12,6 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: GitClone
-                  name: Clone Website
-                  identifier: Clone_Website
-                  spec:
-                    connectorRef: account.Public_Github
-                    repoName: cloudacademy/static-website-example
-                    build:
-                      type: branch
-                      spec:
-                        branch: main
-                  description: Pulls a basic website example
-              - step:
                   type: Run
                   name: Surge
                   identifier: Surge
@@ -64,8 +52,8 @@ pipeline:
   properties:
     ci:
       codebase:
-        connectorRef: account.nicacton_github
-        repoName: plugin-artifact-register
+        connectorRef: account.Public_Github
+        repoName: cloudacademy/static-website-example
         build: <+input>
   identifier: Artifact_Registration
   name: Artifact Registration

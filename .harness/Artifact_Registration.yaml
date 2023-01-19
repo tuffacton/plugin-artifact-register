@@ -44,7 +44,7 @@ pipeline:
             type: String
             description: ""
             value: https://www.google.com
-          - name: PLUGIN_NAME
+          - name: PLUGIN_ARTIFACT_NAME
             type: String
             description: ""
             value: Google

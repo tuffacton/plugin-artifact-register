@@ -56,6 +56,8 @@ pipeline:
           runtime:
             type: Cloud
             spec: {}
+          sharedPaths:
+            - /usr/src/app
         variables:
           - name: PLUGIN_ARTIFACT_FILE
             type: String

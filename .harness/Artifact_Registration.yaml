@@ -20,7 +20,7 @@ pipeline:
                     image: docker.io/lovellfelix/surge.sh-ci
                     shell: Sh
                     command: |-
-                      ./bin/entrypoint.sh
+                      /bin/entrypoint.sh
 
                       export ARTIFACT_URL="https://${SURGE_PROJECT_DOMAIN}.surge.sh"
                     envVariables:

@@ -12,38 +12,14 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: GitClone
-                  name: Git Clone
-                  identifier: Git_Clone
-                  spec:
-                    connectorRef: account.Public_Github
-                    repoName: cloudacademy/static-website-example
-                    cloneDirectory: /usr/src/app
-                    build:
-                      type: branch
-                      spec:
-                        branch: master
-              - step:
                   type: Run
-                  name: Surge
-                  identifier: Surge
+                  name: Find Artifact
+                  identifier: Find_Artifact
                   spec:
-                    connectorRef: Nics_Registry
-                    image: docker.io/lovellfelix/surge.sh-ci
                     shell: Sh
                     command: |-
-                      /bin/entrypoint.sh
-
-                      export ARTIFACT_URL="https://${SURGE_PROJECT_DOMAIN}.surge.sh"
-                    envVariables:
-                      SURGE_ACT_TOKEN: <+input>
-                      SURGE_ACT_EMAIL: nicolas.acton@harness.io
-                      SURGE_PROJECT_DOMAIN: harness-artifact
-                      NAME: Surge
-                    outputVariables:
-                      - name: ARTIFACT_URL
-                      - name: NAME
-                  description: Creates a surge.sh website
+                      export ARTIFACT_URL=https://www.google.com
+                      export NAME=Google
               - step:
                   type: Plugin
                   name: Register Artifact
@@ -58,8 +34,6 @@ pipeline:
           runtime:
             type: Cloud
             spec: {}
-          sharedPaths:
-            - /usr/src/app
         variables:
           - name: PLUGIN_ARTIFACT_FILE
             type: String

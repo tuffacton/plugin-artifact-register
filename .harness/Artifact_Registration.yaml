@@ -24,7 +24,7 @@ pipeline:
 
                       export ARTIFACT_URL="https://${SURGE_PROJECT_DOMAIN}.surge.sh"
                     envVariables:
-                      SURGE_ACT_TOKEN: <+secrets.getValue(“project.NicA_Surge_Token”)>
+                      SURGE_ACT_TOKEN: <+secrets.getValue(“NicA_Surge_Token”)>
                       SURGE_ACT_EMAIL: nicolas.acton@harness.io
                       SURGE_PROJECT_DOMAIN: harness-artifact
                     outputVariables:

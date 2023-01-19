@@ -20,6 +20,8 @@ pipeline:
                     image: docker.io/lovellfelix/surge.sh-ci
                     shell: Sh
                     command: |-
+                      mv ~/static-website-example/* /usr/src/app
+
                       /bin/entrypoint.sh
 
                       export ARTIFACT_URL="https://${SURGE_PROJECT_DOMAIN}.surge.sh"
@@ -40,7 +42,7 @@ pipeline:
                   description: Registers an arbitrary artifact URI in a pipeline execution.
           platform:
             os: Linux
-            arch: Amd64
+            arch: Arm64
           runtime:
             type: Cloud
             spec: {}

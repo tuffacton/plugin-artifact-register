@@ -31,13 +31,12 @@ pipeline:
                     image: tuffacton/registerartifact
                     imagePullPolicy: Always
                   description: Registers an arbitrary artifact URI in a pipeline execution.
-          infrastructure:
-            type: KubernetesDirect
-            spec:
-              connectorRef: org.SE_Sandbox
-              namespace: harness-delegate-ng
-              nodeSelector: {}
-              os: Linux
+          platform:
+            os: Linux
+            arch: Arm64
+          runtime:
+            type: Cloud
+            spec: {}
         variables:
           - name: PLUGIN_ARTIFACT_FILE
             type: String

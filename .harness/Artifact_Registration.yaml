@@ -45,7 +45,7 @@ pipeline:
                     image: ubuntu:22.04
                     shell: Sh
                     command: |-
-                      echo <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_URL>
+                      echo <+pipeline.stages.Build.spec.execution.steps.Find_Artifact.output.outputVariables.TEST>
 
                       echo $TEST
                     envVariables:

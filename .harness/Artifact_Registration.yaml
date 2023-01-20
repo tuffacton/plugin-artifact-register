@@ -60,9 +60,7 @@ pipeline:
                     image: tuffacton/registerartifact
                     settings:
                       plugin_artifact_url: <+steps.Find_Artifact.output.outputVariables.PLUGIN_ARTIFACT_URL>
-                      artifact_url: <+steps.Find_Artifact.output.outputVariables.ARTIFACT_URL>
                       artifact_name: <+steps.Find_Artifact.output.outputVariables.ARTIFACT_NAME>
-                      plugin_artifact_name: <+steps.Find_Artifact.output.outputVariables.PLUGIN_ARTIFACT_NAME>
                     entrypoint:
                       - /build.sh
                     imagePullPolicy: Always

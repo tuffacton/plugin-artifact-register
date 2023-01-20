@@ -30,13 +30,13 @@ pipeline:
                   name: Register Artifact
                   identifier: create_artifact
                   spec:
-                    connectorRef: Nics_Registry
+                    connectorRef: account.Harness_Docker_Connector
                     image: tuffacton/registerartifact
+                    entrypoint:
+                      - /build.sh
                     settings:
                       artifact_url: <+steps.Find_Artifact.output.outputVariables.ARTIFACT_URL>
                       artifact_name: <+steps.Find_Artifact.output.outputVariables.ARTIFACT_NAME>
-                    entrypoint:
-                      - /build.sh
                     imagePullPolicy: Always
                   description: Registers an arbitrary artifact URI in a pipeline execution.
           infrastructure:

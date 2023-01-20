@@ -36,6 +36,21 @@ pipeline:
                       - name: ARTIFACT_NAME
                       - name: PLUGIN_ARTIFACT_NAME
               - step:
+                  type: Run
+                  name: Variable Test
+                  identifier: Variable_Test
+                  spec:
+                    connectorRef: Nics_Registry
+                    image: ubuntu:22.04
+                    shell: Sh
+                    command: |-
+                      echo <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_URL>
+
+                      echo $TEST
+                    envVariables:
+                      TEST: <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_URL>
+                  description: Test to make sure variables are registering
+              - step:
                   type: Plugin
                   name: Register Artifact
                   identifier: create_artifact

@@ -29,6 +29,8 @@ pipeline:
                   spec:
                     connectorRef: Nics_Registry
                     image: tuffacton/registerartifact
+                    entrypoint:
+                      - /build.sh
                     imagePullPolicy: Always
                   description: Registers an arbitrary artifact URI in a pipeline execution.
           infrastructure:

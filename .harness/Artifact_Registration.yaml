@@ -42,11 +42,11 @@ pipeline:
                   spec:
                     connectorRef: Nics_Registry
                     image: tuffacton/registerartifact
-                    envVariables:
-                      PLUGIN_ARTIFACT_URL: <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_URL>
-                      ARTIFACT_URL: <+steps.Find_Artifact.outputVariables.ARTIFACT_URL>
-                      ARTIFACT_NAME: <+steps.Find_Artifact.outputVariables.ARTIFACT_NAME>
-                      PLUGIN_ARTIFACT_NAME: <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_NAME>
+                    settings:
+                      plugin_artifact_url: <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_URL>
+                      artifact_url: <+steps.Find_Artifact.outputVariables.ARTIFACT_URL>
+                      artifact_name: <+steps.Find_Artifact.outputVariables.ARTIFACT_NAME>
+                      plugin_artifact_name: <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_NAME>
                     entrypoint:
                       - /build.sh
                     imagePullPolicy: Always

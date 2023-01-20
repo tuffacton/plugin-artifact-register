@@ -43,7 +43,7 @@ pipeline:
                     connectorRef: Nics_Registry
                     image: tuffacton/registerartifact
                     envVariables:
-                      PLUGIN_ARTIFACT_URL: PLUGIN_ARTIFACT_URL
+                      PLUGIN_ARTIFACT_URL: <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_URL>
                       ARTIFACT_URL: ARTIFACT_URL
                       ARTIFACT_NAME: ARTIFACT_NAME
                       PLUGIN_ARTIFACT_NAME: PLUGIN_ARTIFACT_NAME

@@ -36,6 +36,7 @@ pipeline:
             spec:
               connectorRef: org.SE_Sandbox
               namespace: harness-delegate-ng
+              automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
         variables:

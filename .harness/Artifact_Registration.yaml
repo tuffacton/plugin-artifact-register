@@ -28,6 +28,11 @@ pipeline:
                       echo "ARTIFACT_NAME = $ARTIFACT_NAME"
                       export PLUGIN_ARTIFACT_NAME=Amazon
                       echo "PLUGIN_ARTIFACT_NAME = $PLUGIN_ARTIFACT_NAME"
+                    outputVariables:
+                      - name: PLUGIN_ARTIFACT_URL
+                      - name: ARTIFACT_URL
+                      - name: ARTIFACT_NAME
+                      - name: PLUGIN_ARTIFACT_NAME
               - step:
                   type: Plugin
                   name: Register Artifact

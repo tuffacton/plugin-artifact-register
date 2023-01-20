@@ -20,37 +20,11 @@ pipeline:
                     image: ubuntu:22.04
                     shell: Sh
                     command: |-
-                      export PLUGIN_ARTIFACT_URL=https://www.amazon.com/
-                      echo "PLUGIN_ARTIFACT_URL = $PLUGIN_ARTIFACT_URL"
                       export ARTIFACT_URL=https://www.amazon.com/
-                      echo "ARTIFACT_URL = $ARTIFACT_URL"
                       export ARTIFACT_NAME=Amazon
-                      echo "ARTIFACT_NAME = $ARTIFACT_NAME"
-                      export PLUGIN_ARTIFACT_NAME=Amazon
-                      echo "PLUGIN_ARTIFACT_NAME = $PLUGIN_ARTIFACT_NAME"
-                    envVariables:
-                      TEST: TEST
                     outputVariables:
-                      - name: PLUGIN_ARTIFACT_URL
                       - name: ARTIFACT_URL
                       - name: ARTIFACT_NAME
-                      - name: PLUGIN_ARTIFACT_NAME
-                      - name: TEST
-              - step:
-                  type: Run
-                  name: Variable Test
-                  identifier: Variable_Test
-                  spec:
-                    connectorRef: Nics_Registry
-                    image: ubuntu:22.04
-                    shell: Sh
-                    command: |-
-                      echo <+pipeline.stages.Build.spec.execution.steps.Find_Artifact.output.outputVariables.TEST>
-
-                      echo $TEST
-                    envVariables:
-                      TEST: <+steps.Find_Artifact.outputVariables.PLUGIN_ARTIFACT_URL>
-                  description: Test to make sure variables are registering
               - step:
                   type: Plugin
                   name: Register Artifact
@@ -59,7 +33,7 @@ pipeline:
                     connectorRef: Nics_Registry
                     image: tuffacton/registerartifact
                     settings:
-                      plugin_artifact_url: <+steps.Find_Artifact.output.outputVariables.PLUGIN_ARTIFACT_URL>
+                      artifact_url: <+steps.Find_Artifact.output.outputVariables.ARTIFACT_URL>
                       artifact_name: <+steps.Find_Artifact.output.outputVariables.ARTIFACT_NAME>
                     entrypoint:
                       - /build.sh

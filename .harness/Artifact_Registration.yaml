@@ -52,13 +52,5 @@ pipeline:
             type: String
             description: ""
             value: /addon/tmp/.plugin/artifact
-          - name: PLUGIN_ARTIFACT_URL
-            type: String
-            description: ""
-            value: https://www.google.com
-          - name: PLUGIN_ARTIFACT_NAME
-            type: String
-            description: ""
-            value: Google
   identifier: Artifact_Registration
   name: Artifact Registration

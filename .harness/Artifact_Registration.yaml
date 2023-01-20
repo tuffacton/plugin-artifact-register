@@ -35,6 +35,7 @@ pipeline:
                       - name: ARTIFACT_URL
                       - name: ARTIFACT_NAME
                       - name: PLUGIN_ARTIFACT_NAME
+                      - name: TEST
               - step:
                   type: Run
                   name: Variable Test

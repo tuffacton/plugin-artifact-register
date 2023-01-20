@@ -21,7 +21,13 @@ pipeline:
                     shell: Sh
                     command: |-
                       export PLUGIN_ARTIFACT_URL=https://www.amazon.com/
+                      echo "PLUGIN_ARTIFACT_URL = $PLUGIN_ARTIFACT_URL"
+                      export ARTIFACT_URL=https://www.amazon.com/
+                      echo "ARTIFACT_URL = $ARTIFACT_URL"
+                      export ARTIFACT_NAME=Amazon
+                      echo "ARTIFACT_NAME = $ARTIFACT_NAME"
                       export PLUGIN_ARTIFACT_NAME=Amazon
+                      echo "PLUGIN_ARTIFACT_NAME = $PLUGIN_ARTIFACT_NAME"
               - step:
                   type: Plugin
                   name: Register Artifact

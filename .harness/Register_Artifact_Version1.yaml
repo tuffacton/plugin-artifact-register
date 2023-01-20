@@ -1,0 +1,18 @@
+template:
+  name: Register Artifact
+  type: Step
+  spec:
+    type: Plugin
+    spec:
+      connectorRef: account.Harness_Docker_Connector
+      image: tuffacton/registerartifact
+      entrypoint:
+        - /build.sh
+      settings:
+        artifact_url: <+steps.Find_Artifact.output.outputVariables.ARTIFACT_URL>
+        artifact_name: <+steps.Find_Artifact.output.outputVariables.ARTIFACT_NAME>
+      imagePullPolicy: Always
+  icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAM1BMVEX///8+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvQ+WvTZrkVLAAAAEHRSTlMAIJDg0BCg8DBgsMBQQHCAlOSJbAAAAAFiS0dEAIgFHUgAAAAHdElNRQfmCBATIgTSH9FxAAADbElEQVR42u1b2ZLjIAzkPmxj9P9fOw8zO+MkgJEQdtWW+1nl7oDQBRHiwYMHD4iQSgMAGCVvobcKfuHsDfwGDvChbhgXA+BXtdl5/AA+VQx3/2fj5DR+AIhFQ/dqpOw0/rIC9W5UXalx/pKC1KmTh7/w7bVkpabxfyiQZat9Gv+7AlWx2oYEOIBeBbpi5O00/hcFoWq0zOM/KtjrRmke/0GBrtusE/l/FewtGzmR/0dBbJqQjmKAXuxCnoil7YHuVuBPDUgCIvCB5oQrnwDLH4avWAEhsr9ZgLCRZRXMUDnuxpdhsCiweVTAcHkqzZ0LIIQQduRIGo7i2Goy/8pTnCfqz98EEyib4F0SbNjw7JtgBXbr2dt43B6gK9HtdL0cav0tPvn7k8Ipz4w938XHYtlWINEOuWPzAVz0C75HuJ8Wf//4W+VrmJYBwvGnBR4fxCh44W94gZ6UBYPvq1/3SXn4nR9yJR2T6jIj0fy1ELbQknFjpFnhryyBolYjbQWhuK6BxwE6FJT5Qb9vnHUAMxRU/eptvpkGe5OqgkZsP8yZ03iLWlHQrjJNTimlqDQwoKzAwXUoKvAXCgD9GV0sXArH1miw9adXC1CjZf6wFzDkd+YpjbpYwEe5Ke8WcGkkKpZa9lIv8P3p+KpIxKfAuJyzMpRejUGBjv82V7bmqiuuKOrf2Zd7M7vgu/UxBR/t9M5WGFIdy3GVxlTHLp1tSnNAnwJFND91EqxtXxN7zk+8Gol9V009/CQFpm+S0sdPUVB/GqEI/AQF9dZfUvjRCtaecRqGH6sgt06VPx04ne7dKfaOyIJ9QYOqT9qT0LAS+CPTIfhpOxSWHxmQM/dlwOY5EgEVIaPrU8/HbndSLopc9NQLcs20+PR6aL+Zf+B50gFDAzg/7gajz1SW0avB8RGgC0MCWPqySL8c5xoTkd/vss2pqO7IOCjb7hZAfLZ5Gm77jwntnUo7B+qEuCqhZUd1fufWG6scLRW0Phkw0dLx5wKHiddU/tbDlA2RMdyEbOAROWuA/6+JaX40TuOvb8LWnbfNYEreu451PDmtI1BdfUecxl/8diG0x2n8QgTdk9ziNP7P5iB2rpTh+zOTPTRna63OS34a/3eDuKzruuTusa654y9nh1GwuoFfCCG/Lyb0TX/6e/DgwX+BL/00xEvnwxv6AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIyLTA4LTE2VDE5OjMzOjM5KzAwOjAwjAJk/AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMi0wOC0xNlQxOTozMzozOSswMDowMP1f3EAAAAAASUVORK5CYII=
+  identifier: Register_Artifact
+  description: Harness/Drone plugin for registering an arbitrary artifact as a file-upload artifact for a Build step.
+  versionLabel: Version1
